@@ -6,7 +6,7 @@ title: blank # the website title (if blank, full name will be used instead)
 first_name: Donghee
 middle_name:
 last_name: Seo
-contact_note: ''
+contact_note: ""
 description: Robotics and control engineering — Donghee Seo.
 footer_text: >
   Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.

@@ -6,17 +6,17 @@ GitHub에서 아래 파일을 열고 연필 버튼으로 수정한 뒤 `Commit c
 
 ## 수정 위치
 
-| 내용 | 파일 |
-| --- | --- |
-| 이름·사이트 소개 | `_config.yml`의 `first_name`, `last_name`, `description` |
-| 첫 화면 소개·직함 | `_pages/about.md`의 본문과 `subtitle` |
-| 프로필 사진 | `assets/img/`에 사진 업로드 후 about.md의 `image: false`를 `image: 파일명.jpg`로 변경 |
-| GitHub·Scholar·ORCID 등 | `_data/socials.yml` |
-| 논문 | `_bibliography/papers.bib` |
-| 프로젝트 | `_projects/프로젝트이름.md` |
-| 학력·경력·수상·기술 | `_data/cv.yml` |
-| 메뉴 이름·순서 | `_pages/` 각 파일의 `title`, `nav_order` |
-| CV 다운로드 | `assets/pdf/cv.pdf` 업로드 후 `_pages/cv.md`의 `cv_pdf: /assets/pdf/cv.pdf` 설정 |
+| 내용                    | 파일                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------- |
+| 이름·사이트 소개        | `_config.yml`의 `first_name`, `last_name`, `description`                              |
+| 첫 화면 소개·직함       | `_pages/about.md`의 본문과 `subtitle`                                                 |
+| 프로필 사진             | `assets/img/`에 사진 업로드 후 about.md의 `image: false`를 `image: 파일명.jpg`로 변경 |
+| GitHub·Scholar·ORCID 등 | `_data/socials.yml`                                                                   |
+| 논문                    | `_bibliography/papers.bib`                                                            |
+| 프로젝트                | `_projects/프로젝트이름.md`                                                           |
+| 학력·경력·수상·기술     | `_data/cv.yml`                                                                        |
+| 메뉴 이름·순서          | `_pages/` 각 파일의 `title`, `nav_order`                                              |
+| CV 다운로드             | `assets/pdf/cv.pdf` 업로드 후 `_pages/cv.md`의 `cv_pdf: /assets/pdf/cv.pdf` 설정      |
 
 ## 소셜 링크
 
