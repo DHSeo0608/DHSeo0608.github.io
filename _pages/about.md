@@ -5,7 +5,7 @@ permalink: /
 subtitle: Robotics & Control Engineer
 profile:
   align: right
-  image: false
+  image: donghee.jpg
   image_circular: false
 selected_papers: false
 social: true
