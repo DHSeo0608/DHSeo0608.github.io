@@ -347,14 +347,14 @@ display_categories: ["external-services"] # these categories will be displayed o
 
 scholar:
   last_name: [Seo]
-  first_name: [Donghee, D.]
+  first_name: [Donghee, Dong Hee, D., D. H.]
 
   style: apa
   locale: en
 
   source: /_bibliography/
   bibliography: papers.bib
-  bibliography_template: bib
+  bibliography_template: publication
   # Note: if you have latex math in your bibtex, the latex filter
   # preprocessing may conflict with MathJAX if the latter is enabled.
   # See https://github.com/alshedivat/al-folio/issues/357.

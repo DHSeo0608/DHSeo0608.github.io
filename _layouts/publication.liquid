@@ -1,0 +1,43 @@
+---
+---
+{% comment %}Site-specific bibliography layout. Keep paper metadata in papers.bib.{% endcomment %}
+{% assign paper_url = entry.html | default: entry.url %}
+{% if paper_url == blank and entry.doi %}
+  {% assign paper_url = entry.doi | prepend: 'https://doi.org/' %}
+{% endif %}
+<div class="row">
+  <div id="{{ entry.key }}" class="col-sm-12">
+    <div class="title">
+      {% if paper_url != blank %}
+        <a href="{{ paper_url | escape }}" target="_blank" rel="noopener noreferrer">{{ entry.title }}</a>
+      {% else %}
+        {{ entry.title }}
+      {% endif %}
+    </div>
+    <div class="author">
+      {% for author in entry.author_array %}
+        {% unless forloop.first %}, {% endunless %}
+        {% if site.scholar.last_name contains author.last and site.scholar.first_name contains author.first %}
+          <strong>
+            {{- author.first }}
+            {{ author.last -}}
+          </strong>
+        {% else %}
+          {{ author.first }}
+          {{ author.last }}
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="periodical">
+      <em>{{ entry.journal | default: entry.booktitle }}</em>
+      {% if entry.volume %} {{ entry.volume }}{% endif %}
+      {% if entry.number %}({{ entry.number }}){% endif %}
+      {% if entry.pages %}, {{ entry.pages | replace: '--', '–' }}{% endif %}, {{ entry.year }}.
+    </div>
+    {% if entry.doi %}
+      <div class="links">
+        <a href="https://doi.org/{{ entry.doi | escape }}" class="btn btn-sm z-depth-0" target="_blank" rel="noopener noreferrer">DOI</a>
+      </div>
+    {% endif %}
+  </div>
+</div>

@@ -7,6 +7,8 @@ nav: true
 nav_order: 1
 ---
 
+Click a paper title to view the publication on the publisher's website.
+
 {% include bib_search.liquid %}
 
 <div class="publications">

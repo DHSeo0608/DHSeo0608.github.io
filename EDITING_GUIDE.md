@@ -29,6 +29,9 @@ Google Scholar는 주소의 `user=` 뒤 ID, ORCID는 본인의 ORCID 번호를 �
 `templates/paper.bib.example`을 참고해 실제 논문의 BibTeX를 `_bibliography/papers.bib`에 넣으세요.
 Google Scholar 또는 출판사에서 BibTeX를 가져올 수 있습니다.
 학술지 논문은 `@article`, 학회 논문은 `@inproceedings`를 사용하세요.
+논문 제목은 `html`에 적힌 출판사 주소로 연결됩니다. `html`이 없으면 `url`, 그다음 `doi`를 사용합니다.
+제목 링크 표시 방식은 `_layouts/publication.liquid`에서 관리합니다.
+Scholar 목록은 자동 동기화되지 않습니다. 새 논문은 이 파일에 추가하거나 업데이트를 요청하세요.
 `selected = {true}`를 넣고 about.md의 `selected_papers: true`를 켜면 첫 화면에도 표시됩니다.
 예시 파일은 홈페이지에 공개되지 않습니다.
 

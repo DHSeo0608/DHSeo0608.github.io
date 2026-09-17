@@ -29,4 +29,5 @@ is published. Pull requests build and validate without deploying.
 
 al-folio starter commit: `8ec1f3608d997491e0206c4e7a9368547a5ef255`.
 Gem versions are recorded in `Gemfile` and `Gemfile.lock`. Original MIT license retained.
-No theme runtime overrides.
+The site-specific `_layouts/publication.liquid` bibliography layout makes paper titles clickable.
+No existing theme layout is overridden.
