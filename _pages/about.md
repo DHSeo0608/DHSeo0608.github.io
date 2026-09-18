@@ -4,7 +4,7 @@ title: Home
 permalink: /
 subtitle: Robotics & Control Engineer
 profile:
-  align: right
+  align: left
   image: donghee.jpg
   image_circular: false
 selected_papers: false
@@ -14,6 +14,8 @@ announcements:
 latest_posts:
   enabled: false
 ---
+
+## About
 
 I am Donghee Seo, a robotics and control engineer.
 

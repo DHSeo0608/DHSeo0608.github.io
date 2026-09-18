@@ -1,0 +1,80 @@
+---
+layout: default
+---
+<style>
+  .home-profile { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 40px; align-items: start; margin: 0 0 40px; }
+  .home-profile-photo { width: 230px; max-width: 100%; }
+  .home-profile-photo figure { margin: 0; }
+  .home-profile-photo img { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .home-profile .post-header { margin: 0; padding: 0; }
+  .home-profile .post-title { margin: 0 0 8px; }
+  .home-profile .desc { margin: 0 0 20px; }
+  .home-profile .social { margin: 0; text-align: left; }
+  .home-profile .contact-icons { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 2rem; line-height: 1.4; }
+  .home-profile .contact-icons a { display: inline-flex; align-items: center; }
+  .home-profile .contact-icons a img, .home-profile .contact-icons a svg { width: 2rem; height: 2rem; margin: 0; }
+  .home-profile .contact-note:empty { display: none; }
+  .home-content { clear: both; }
+  @media (max-width: 575px) {
+    .home-profile { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
+  }
+</style>
+<div class="post home-page">
+  <section class="home-profile" aria-labelledby="profile-name">
+    {% if page.profile.image %}
+      <div class="home-profile-photo">
+        {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+        {% include figure.liquid loading="eager" path=profile_image_path class="img-fluid" sizes="230px" alt="Donghee Seo" cache_bust=true %}
+        {% if page.profile.more_info %}<div class="more-info">{{ page.profile.more_info }}</div>{% endif %}
+      </div>
+    {% endif %}
+    <header class="post-header">
+      <h1 class="post-title" id="profile-name">
+        {% if site.title == 'blank' %}
+          <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} {{ site.last_name }}
+        {% else %}{{ site.title }}{% endif %}
+      </h1>
+      <p class="desc">{{ page.subtitle }}</p>
+      {% if page.social %}
+        <div class="social">
+          <div class="contact-icons">{% social_links %}</div>
+          <div class="contact-note">{{ site.contact_note }}</div>
+        </div>
+      {% endif %}
+    </header>
+  </section>
+  <article class="home-content">
+    {{ content }}
+    <!-- News -->
+    {% if page.announcements and page.announcements.enabled %}
+      <h2>
+        <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+      </h2>
+      {% include news.liquid limit=true %}
+    {% endif %}
+
+    <!-- Latest posts -->
+    {% if page.latest_posts and page.latest_posts.enabled %}
+      <h2>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+      </h2>
+      {% include latest_posts.liquid %}
+    {% endif %}
+
+    <!-- Selected papers -->
+    {% if page.selected_papers %}
+      <h2>
+        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
+      </h2>
+      {% include selected_papers.liquid %}
+    {% endif %}
+
+    {% if site.newsletter and site.newsletter.enabled and site.footer_fixed %}
+      {% if site.plugins contains 'al_newsletter' %}
+        {% include plugins/al_newsletter_form_center_margin.liquid %}
+      {% else %}
+        {% include newsletter.liquid center=true %}
+      {% endif %}
+    {% endif %}
+  </article>
+</div>
