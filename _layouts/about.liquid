@@ -34,8 +34,17 @@ layout: default
   .achievement-entry + .achievement-entry { border-top: 1px solid var(--global-divider-color); }
   .achievement-title { margin: 0; font-size: 1.06rem; font-weight: 700; }
   .achievement-date { white-space: nowrap; }
-  .achievement-meta, .achievement-detail, .achievement-link { grid-column: 1 / -1; margin: 0; }
+  .achievement-meta, .achievement-detail { grid-column: 1 / -1; margin: 0; }
   .achievement-meta { color: var(--global-text-color-light); }
+  .award-list { display: grid; gap: 0; }
+  .award-entry { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 30px; align-items: start; padding: 30px 0; }
+  .award-entry + .award-entry { border-top: 1px solid var(--global-divider-color); }
+  .award-image { display: flex; align-items: flex-start; justify-content: center; min-height: 210px; }
+  .award-image img { display: block; width: 100%; height: 230px; object-fit: contain; object-position: top center; }
+  .award-content { padding-top: 4px; }
+  .award-content .achievement-title { margin-bottom: 8px; }
+  .award-content .achievement-date { margin-bottom: 8px; color: var(--global-text-color-light); }
+  .award-content .achievement-meta { margin-bottom: 8px; }
   @media (max-width: 575px) {
     .home-profile { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
     .home-section { margin-top: 36px; }
@@ -45,6 +54,9 @@ layout: default
     .achievement-card { padding: 2px 20px; }
     .achievement-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
     .achievement-date { white-space: normal; color: var(--global-text-color-light); }
+    .award-entry { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .award-image { justify-content: flex-start; min-height: 0; }
+    .award-image img { width: auto; max-width: 100%; height: 260px; }
   }
 </style>
 <div class="post home-page">
@@ -146,29 +158,41 @@ layout: default
 
     <section class="home-section" id="awards">
       <h2>Awards</h2>
-      <div class="achievement-card">
-        <div class="achievement-entry">
-          <p class="achievement-title">Best Poster Paper Award</p>
-          <div class="achievement-date">Jun. 2024</div>
-          <p class="achievement-meta">EBRC 2024</p>
-          <p class="achievement-detail"><em>Quasi-Convex Adaptive Sliding Mode Control Combined with Time-Delay Control for a Human-Assisting Manipulator</em></p>
-          <p class="achievement-link"><a href="{{ '/assets/pdf/awards/ebrc-2024-best-poster-paper-award.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+      <div class="award-list">
+        <div class="award-entry">
+          <div class="award-image">
+            <img src="{{ '/assets/img/awards/ebrc-2024-best-poster-paper-award.jpg' | relative_url }}" alt="EBRC 2024 Best Poster Paper Award certificate" loading="lazy">
+          </div>
+          <div class="award-content">
+            <p class="achievement-title">Best Poster Paper Award</p>
+            <div class="achievement-date">Jun. 2024</div>
+            <p class="achievement-meta">EBRC 2024</p>
+            <p class="achievement-detail"><em>Quasi-Convex Adaptive Sliding Mode Control Combined with Time-Delay Control for a Human-Assisting Manipulator</em></p>
+          </div>
         </div>
 
-        <div class="achievement-entry">
-          <p class="achievement-title">Excellence Award, Mobility Division</p>
-          <div class="achievement-date">Dec. 13, 2022</div>
-          <p class="achievement-meta">2022 Industry-Academic Cooperation Convergence Education Competition · Soonchunhyang University LINC 3.0</p>
-          <p class="achievement-detail">Team Apocalypse</p>
-          <p class="achievement-link"><a href="{{ '/assets/pdf/awards/2022-mobility-excellence-award.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+        <div class="award-entry">
+          <div class="award-image">
+            <img src="{{ '/assets/img/awards/2022-mobility-excellence-award.jpg' | relative_url }}" alt="2022 Mobility Division Excellence Award certificate" loading="lazy">
+          </div>
+          <div class="award-content">
+            <p class="achievement-title">Excellence Award, Mobility Division</p>
+            <div class="achievement-date">Dec. 13, 2022</div>
+            <p class="achievement-meta">2022 Industry-Academic Cooperation Convergence Education Competition · Soonchunhyang University LINC 3.0</p>
+            <p class="achievement-detail">Team Apocalypse</p>
+          </div>
         </div>
 
-        <div class="achievement-entry">
-          <p class="achievement-title">Grand Prize</p>
-          <div class="achievement-date">Nov. 9, 2022</div>
-          <p class="achievement-meta">31st Soonchunhyang University College of Engineering Academic Festival</p>
-          <p class="achievement-detail"><em>Precision Control Object Loading System Using ROS</em></p>
-          <p class="achievement-link"><a href="{{ '/assets/pdf/awards/2022-engineering-academic-festival-grand-prize.pdf' | relative_url }}" target="_blank" rel="noopener noreferrer">View certificate</a></p>
+        <div class="award-entry">
+          <div class="award-image">
+            <img src="{{ '/assets/img/awards/2022-engineering-academic-festival-grand-prize.jpg' | relative_url }}" alt="2022 College of Engineering Academic Festival Grand Prize certificate" loading="lazy">
+          </div>
+          <div class="award-content">
+            <p class="achievement-title">Grand Prize</p>
+            <div class="achievement-date">Nov. 9, 2022</div>
+            <p class="achievement-meta">31st Soonchunhyang University College of Engineering Academic Festival</p>
+            <p class="achievement-detail"><em>Precision Control Object Loading System Using ROS</em></p>
+          </div>
         </div>
       </div>
     </section>
