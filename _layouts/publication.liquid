@@ -6,7 +6,20 @@
   {% assign paper_url = entry.doi | prepend: 'https://doi.org/' %}
 {% endif %}
 <div class="row">
-  <div id="{{ entry.key }}" class="col-sm-12">
+  {% if entry.preview %}
+    <div class="col-sm-3 mb-3 mb-sm-0">
+      {% if paper_url != blank %}<a href="{{ paper_url | escape }}" target="_blank" rel="noopener noreferrer">{% endif %}
+      <img
+        src="{{ '/assets/img/' | append: entry.preview | relative_url }}"
+        class="img-fluid rounded"
+        style="width: 100%; max-height: 190px; object-fit: contain"
+        alt="Diagram for {{ entry.title | escape }}"
+        loading="lazy"
+      >
+      {% if paper_url != blank %}</a>{% endif %}
+    </div>
+  {% endif %}
+  <div id="{{ entry.key }}" class="{% if entry.preview %}col-sm-9{% else %}col-sm-12{% endif %}">
     <div class="title">
       {% if paper_url != blank %}
         <a href="{{ paper_url | escape }}" target="_blank" rel="noopener noreferrer">{{ entry.title }}</a>

@@ -367,6 +367,8 @@ scholar:
   details_link: Details
 
   query: "@*"
+  sort_by: importance
+  order: ascending
   group_by: year
   group_order: descending
 

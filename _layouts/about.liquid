@@ -21,7 +21,6 @@ layout: default
   .home-section > h2 { margin-bottom: 24px; }
   .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
   .cv-card { padding: 28px 30px; border-radius: 6px; background: var(--global-card-bg-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
-  .cv-card h3 { margin: 0 0 24px; font-size: 1.75rem; font-weight: 400; }
   .cv-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 28px; padding: 0 0 24px; }
   .cv-entry + .cv-entry { padding-top: 24px; border-top: 1px solid var(--global-divider-color); }
   .cv-entry:last-child { padding-bottom: 0; }
@@ -69,7 +68,7 @@ layout: default
     </section>
 
     <section class="home-section" id="publications">
-      <h2>Publications</h2>
+      <h2>Publications / Pre-Prints</h2>
       <p class="home-section-intro">Click a paper title to view the publication on the publisher's website.</p>
       <div class="publications">
         {% bibliography %}
@@ -92,11 +91,9 @@ layout: default
       {% endif %}
     </section>
 
-    <section class="home-section" id="cv">
-      <h2>CV</h2>
+    <section class="home-section" id="education">
+      <h2>Education</h2>
       <div class="cv-card">
-        <h3>Education</h3>
-
         <div class="cv-entry">
           <p class="cv-degree">M.S. in ICT Convergence Engineering</p>
           <div class="cv-date">Sep. 2023 – Feb. 2025</div>
