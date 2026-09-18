@@ -20,10 +20,23 @@ layout: default
   .home-section:first-child { margin-top: 0; }
   .home-section > h2 { margin-bottom: 24px; }
   .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
-  .home-cv-link { display: inline-block; margin-top: 8px; }
+  .cv-card { padding: 28px 30px; border-radius: 6px; background: var(--global-card-bg-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
+  .cv-card h3 { margin: 0 0 24px; font-size: 1.75rem; font-weight: 400; }
+  .cv-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 28px; padding: 0 0 24px; }
+  .cv-entry + .cv-entry { padding-top: 24px; border-top: 1px solid var(--global-divider-color); }
+  .cv-entry:last-child { padding-bottom: 0; }
+  .cv-degree { margin: 0; font-size: 1.08rem; font-weight: 700; }
+  .cv-date { white-space: nowrap; font-size: 1rem; }
+  .cv-school { grid-column: 1 / -1; margin: 0; font-size: 1rem; font-style: italic; }
+  .cv-details { grid-column: 1 / -1; margin: 0; padding-left: 1.5rem; }
+  .cv-details li { margin-bottom: 4px; }
+  .home-cv-link { display: inline-block; margin-top: 20px; }
   @media (max-width: 575px) {
     .home-profile { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
     .home-section { margin-top: 36px; }
+    .cv-card { padding: 22px 20px; }
+    .cv-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+    .cv-date { white-space: normal; color: var(--global-text-color-light); }
   }
 </style>
 <div class="post home-page">
@@ -82,7 +95,28 @@ layout: default
 
     <section class="home-section" id="cv">
       <h2>CV</h2>
-      <p>Education, experience, and research activities.</p>
+      <div class="cv-card">
+        <h3>Education</h3>
+
+        <div class="cv-entry">
+          <p class="cv-degree">M.S. in ICT Convergence Engineering</p>
+          <div class="cv-date">Sep. 2023 – Feb. 2025</div>
+          <p class="cv-school">Soonchunhyang University, Asan, South Korea</p>
+          <ul class="cv-details">
+            <li>Dissertation: Research on Adaptive Gains Utilizing Strictly Increasing Function in Adaptive Sliding Mode Control for Robust Control of Robot Manipulators</li>
+            <li>Advisor: Prof. Seok Young Lee</li>
+          </ul>
+        </div>
+
+        <div class="cv-entry">
+          <p class="cv-degree">B.S. in Electronic Engineering</p>
+          <div class="cv-date">Mar. 2018 – Aug. 2023</div>
+          <p class="cv-school">Soonchunhyang University, Asan, South Korea</p>
+          <ul class="cv-details">
+            <li>Thesis: Precision Control Object Loading System Using ROS</li>
+          </ul>
+        </div>
+      </div>
       <a class="btn btn-sm btn-outline-primary home-cv-link" href="{{ '/cv/' | relative_url }}">View full CV</a>
     </section>
 
