@@ -15,8 +15,4 @@ latest_posts:
   enabled: false
 ---
 
-I am Donghee Seo, a robotics and control engineer.
-
-This website brings together my research, engineering projects, and curriculum vitae.
-
-<!-- Replace this introduction with your biography, affiliation, and research interests. -->
+Dong Hee Seo received the B.S. degree in Electronic Engineering from Soonchunhyang University, Asan, South Korea, in 2023. He received the M.S. degree in ICT Convergence Engineering from the same university in 2025. His research interests include robotics and control theory.
