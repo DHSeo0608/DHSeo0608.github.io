@@ -15,4 +15,6 @@ latest_posts:
   enabled: false
 ---
 
-Dong Hee Seo received the B.S. degree in Electronic Engineering from Soonchunhyang University, Asan, South Korea, in 2023. He received the M.S. degree in ICT Convergence Engineering from the same university in 2025. His research interests include robotics and control theory.
+Hello! I am **Dong Hee Seo**, a robotics and control researcher. I received my B.S. in Electronic Engineering from Soonchunhyang University in 2023 and my M.S. in ICT Convergence Engineering from the same university in 2025.
+
+My research interests center around **robotics** and **control theory**. In particular, I am interested in developing robust and adaptive control methods for robot manipulators.
