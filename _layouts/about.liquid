@@ -2,6 +2,7 @@
 layout: default
 ---
 <style>
+  html { scroll-behavior: smooth; }
   .home-profile { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 40px; align-items: start; margin: 0 0 40px; }
   .home-profile-photo { width: 230px; max-width: 100%; }
   .home-profile-photo figure { margin: 0; }
@@ -15,12 +16,18 @@ layout: default
   .home-profile .contact-icons a img, .home-profile .contact-icons a svg { width: 2rem; height: 2rem; margin: 0; }
   .home-profile .contact-note:empty { display: none; }
   .home-content { clear: both; }
+  .home-section { padding-top: 16px; margin-top: 48px; scroll-margin-top: 72px; }
+  .home-section:first-child { margin-top: 0; }
+  .home-section > h2 { margin-bottom: 24px; }
+  .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
+  .home-cv-link { display: inline-block; margin-top: 8px; }
   @media (max-width: 575px) {
     .home-profile { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
+    .home-section { margin-top: 36px; }
   }
 </style>
 <div class="post home-page">
-  <section class="home-profile" aria-labelledby="profile-name">
+  <section class="home-profile" id="home" aria-labelledby="profile-name">
     {% if page.profile.image %}
       <div class="home-profile-photo">
         {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
@@ -44,7 +51,41 @@ layout: default
     </header>
   </section>
   <article class="home-content">
-    {{ content }}
+    <section class="home-section" id="about">
+      <h2>About</h2>
+      {{ content }}
+    </section>
+
+    <section class="home-section" id="publications">
+      <h2>Publications</h2>
+      <p class="home-section-intro">Click a paper title to view the publication on the publisher's website.</p>
+      <div class="publications">
+        {% bibliography %}
+      </div>
+    </section>
+
+    <section class="home-section" id="projects">
+      <h2>Projects</h2>
+      {% if site.projects.size == 0 %}
+        <p>Project details will be added soon.</p>
+      {% else %}
+        {% assign sorted_projects = site.projects | sort: 'importance' %}
+        <div class="projects">
+          <div class="row row-cols-1 row-cols-md-3">
+            {% for project in sorted_projects %}
+              {% include projects.liquid %}
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    </section>
+
+    <section class="home-section" id="cv">
+      <h2>CV</h2>
+      <p>Education, experience, and research activities.</p>
+      <a class="btn btn-sm btn-outline-primary home-cv-link" href="{{ '/cv/' | relative_url }}">View full CV</a>
+    </section>
+
     <!-- News -->
     {% if page.announcements and page.announcements.enabled %}
       <h2>
