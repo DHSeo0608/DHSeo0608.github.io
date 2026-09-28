@@ -3,7 +3,7 @@ layout: default
 ---
 <style>
   html { scroll-behavior: smooth; }
-  .home-profile { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 40px; align-items: start; margin: 0 0 40px; }
+  .home-profile { display: grid; grid-template-columns: 230px minmax(0, 1fr); column-gap: 40px; row-gap: 24px; align-items: start; margin: 0 0 40px; }
   .home-profile-photo { width: 230px; max-width: 100%; }
   .home-profile-photo figure { margin: 0; }
   .home-profile-photo img { display: block; width: 100%; height: auto; border-radius: 6px; }
@@ -14,7 +14,10 @@ layout: default
   .home-profile .contact-icons { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; font-size: 2rem; line-height: 1.4; }
   .home-profile .contact-icons a { display: inline-flex; align-items: center; }
   .home-profile .contact-icons a img, .home-profile .contact-icons a svg { width: 2rem; height: 2rem; margin: 0; }
+  .home-profile .contact-icons .lab-link { padding: 0.2rem 0.6rem; border: 2px solid currentColor; border-radius: 999px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; line-height: 1.2; text-decoration: none; }
   .home-profile .contact-note:empty { display: none; }
+  .research-interest-list { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; gap: 12px; align-items: center; margin-top: 4px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: thin; }
+  .research-interest-tag { flex: 0 0 auto; padding: 10px 18px; border-radius: 999px; background: rgba(76, 140, 104, 0.12); font-size: 1rem; font-weight: 600; white-space: nowrap; }
   .home-content { clear: both; }
   .home-section { padding-top: 16px; margin-top: 48px; scroll-margin-top: 72px; }
   .home-section:first-child { margin-top: 0; }
@@ -47,6 +50,8 @@ layout: default
   .award-content .achievement-meta { margin-bottom: 8px; }
   @media (max-width: 575px) {
     .home-profile { grid-template-columns: minmax(0, 1fr); gap: 24px; margin-bottom: 32px; }
+    .research-interest-list { grid-column: 1; flex-wrap: wrap; overflow-x: visible; gap: 10px; }
+    .research-interest-tag { padding: 9px 15px; font-size: 0.95rem; }
     .home-section { margin-top: 36px; }
     .cv-card { padding: 22px 20px; }
     .cv-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
@@ -74,14 +79,26 @@ layout: default
           <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }} {{ site.last_name }}
         {% else %}{{ site.title }}{% endif %}
       </h1>
-      <p class="desc">{{ page.subtitle }}</p>
+      {% if page.subtitle %}<p class="desc">{{ page.subtitle }}</p>{% endif %}
       {% if page.social %}
         <div class="social">
-          <div class="contact-icons">{% social_links %}</div>
+          <div class="contact-icons">
+            {% social_links %}
+            {% if page.lab_url %}
+              <a class="lab-link" href="{{ page.lab_url }}" target="_blank" rel="noopener noreferrer" aria-label="ICAR Laboratory website" title="ICAR Laboratory">LAB</a>
+            {% endif %}
+          </div>
           <div class="contact-note">{{ site.contact_note }}</div>
         </div>
       {% endif %}
     </header>
+    {% if page.research_interests %}
+      <div class="research-interest-list" aria-label="Research interests">
+        {% for interest in page.research_interests %}
+          <span class="research-interest-tag">{{ interest }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
   </section>
   <article class="home-content">
     <section class="home-section" id="about">

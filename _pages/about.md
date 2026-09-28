@@ -2,7 +2,13 @@
 layout: about
 title: Home
 permalink: /
-subtitle: Robotics & Control Engineer
+lab_url: https://icarlaboratory.github.io/index.html
+research_interests:
+  - Control theory
+  - Robust control
+  - Robot manipulators
+  - Time-delay control
+  - Sliding mode control
 profile:
   align: left
   image: donghee.jpg
