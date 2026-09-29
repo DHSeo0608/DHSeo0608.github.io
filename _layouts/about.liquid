@@ -40,6 +40,12 @@ layout: default
   .achievement-date { white-space: nowrap; }
   .achievement-meta, .achievement-detail { grid-column: 1 / -1; margin: 0; }
   .achievement-meta { color: var(--global-text-color-light); }
+  .conference-list { display: grid; gap: 0; }
+  .conference-entry { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 30px; align-items: start; padding: 30px 0; }
+  .conference-entry + .conference-entry { border-top: 1px solid var(--global-divider-color); }
+  .conference-image img { display: block; width: 230px; height: 160px; border-radius: 4px; object-fit: cover; }
+  .conference-content { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 28px; }
+  .conference-content .achievement-meta, .conference-content .achievement-detail { grid-column: 1 / -1; }
   .award-list { display: grid; gap: 0; }
   .award-entry { display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 30px; align-items: start; padding: 30px 0; }
   .award-entry + .award-entry { border-top: 1px solid var(--global-divider-color); }
@@ -60,6 +66,9 @@ layout: default
     .achievement-card { padding: 2px 20px; }
     .achievement-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
     .achievement-date { white-space: normal; color: var(--global-text-color-light); }
+    .conference-entry { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .conference-image img { width: 100%; height: auto; }
+    .conference-content { grid-template-columns: minmax(0, 1fr); gap: 6px; }
     .award-entry { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .award-image { justify-content: flex-start; min-height: 0; }
     .award-image img { width: auto; max-width: 100%; height: 260px; }
@@ -159,19 +168,29 @@ layout: default
 
     <section class="home-section" id="conferences">
       <h2>Conference Presentations</h2>
-      <div class="achievement-card">
-        <div class="achievement-entry">
-          <p class="achievement-title">The 6th Engineering in Biomedical and Rehabilitation &amp; Home Conference (EBRC 2024)</p>
-          <div class="achievement-date">Jun. 25, 2024</div>
-          <p class="achievement-meta">Tokyo, Japan · Oral Presentation</p>
-          <p class="achievement-detail"><em>Quasi-Convex Adaptive Sliding Mode Control Combined with Time-Delay Control for a Human-Assisting Manipulator</em></p>
+      <div class="conference-list">
+        <div class="conference-entry">
+          <div class="conference-image">
+            <img src="{{ '/assets/img/conferences/ebrc-2024.png' | relative_url }}" alt="Group photo at EBRC 2024 in Tokyo" loading="lazy">
+          </div>
+          <div class="conference-content">
+            <p class="achievement-title">The 6th Engineering in Biomedical and Rehabilitation &amp; Home Conference (EBRC 2024)</p>
+            <div class="achievement-date">Jun. 25, 2024</div>
+            <p class="achievement-meta">Tokyo, Japan · Oral Presentation</p>
+            <p class="achievement-detail"><em>Quasi-Convex Adaptive Sliding Mode Control Combined with Time-Delay Control for a Human-Assisting Manipulator</em></p>
+          </div>
         </div>
 
-        <div class="achievement-entry">
-          <p class="achievement-title">ICT 4s Health &amp; Home Conference</p>
-          <div class="achievement-date">Dec. 19, 2023</div>
-          <p class="achievement-meta">Oral Presentation</p>
-          <p class="achievement-detail"><em>Two-Slope Function-Based Adaptive Sliding Mode Control for Assist Human</em></p>
+        <div class="conference-entry">
+          <div class="conference-image">
+            <img src="{{ '/assets/img/conferences/ict-4s-health-home-2023.png' | relative_url }}" alt="Group photo at ICT 4s Health and Home Conference 2023 in Da Nang" loading="lazy">
+          </div>
+          <div class="conference-content">
+            <p class="achievement-title">ICT 4s Health &amp; Home Conference</p>
+            <div class="achievement-date">Dec. 19, 2023</div>
+            <p class="achievement-meta">Da Nang, Vietnam · Oral Presentation</p>
+            <p class="achievement-detail"><em>Two-Slope Function-Based Adaptive Sliding Mode Control for Assist Human</em></p>
+          </div>
         </div>
       </div>
     </section>
