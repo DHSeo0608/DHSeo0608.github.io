@@ -25,11 +25,21 @@ layout: default
   .home-section > h2 { margin-bottom: 24px; }
   .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
   .featured-project { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 30px; align-items: start; padding: 18px 0 8px; }
-  .project-video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 5px; background: #000; object-fit: cover; cursor: pointer; }
+  .project-thumbnail-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #000; cursor: pointer; }
+  .project-thumbnail-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.2s ease; }
+  .project-thumbnail-button:hover .project-thumbnail-image, .project-thumbnail-button:focus .project-thumbnail-image { transform: scale(1.025); }
+  .project-play-icon { position: absolute; top: 50%; left: 50%; display: grid; width: 54px; height: 54px; border-radius: 50%; background: rgba(0, 0, 0, 0.7); color: #fff; place-items: center; transform: translate(-50%, -50%); }
+  .project-play-icon::before { width: 0; height: 0; margin-left: 4px; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid currentColor; content: ''; }
   .project-title-button { display: inline; margin: 0; padding: 0; border: 0; background: none; color: var(--global-theme-color); font: inherit; font-size: 1.12rem; font-weight: 700; line-height: 1.35; text-align: left; cursor: pointer; }
   .project-title-button:hover, .project-title-button:focus { text-decoration: underline; }
   .project-description { margin: 12px 0 0; color: var(--global-text-color); font-size: 1rem; line-height: 1.6; }
   .project-play-note { margin: 12px 0 0; color: var(--global-text-color-light); font-size: 0.9rem; }
+  .project-video-modal { position: fixed; z-index: 2000; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.84); }
+  .project-video-modal.is-open { display: flex; }
+  .project-video-dialog { position: relative; width: min(1100px, 100%); }
+  .project-video-player { display: block; width: 100%; max-height: 82vh; border-radius: 6px; background: #000; }
+  .project-video-close { position: absolute; z-index: 1; top: -18px; right: -18px; width: 42px; height: 42px; padding: 0; border: 2px solid #fff; border-radius: 50%; background: #111; color: #fff; font-size: 1.7rem; line-height: 1; cursor: pointer; }
+  body.project-video-open { overflow: hidden; }
   .cv-card { padding: 28px 30px; border-radius: 6px; background: var(--global-card-bg-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
   .cv-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 28px; padding: 0 0 24px; }
   .cv-entry + .cv-entry { padding-top: 24px; border-top: 1px solid var(--global-divider-color); }
@@ -67,6 +77,8 @@ layout: default
     .research-interest-tag { padding: 9px 15px; font-size: 0.95rem; }
     .home-section { margin-top: 36px; }
     .featured-project { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .project-video-modal { padding: 14px; }
+    .project-video-close { top: -14px; right: -8px; }
     .cv-card { padding: 22px 20px; }
     .cv-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
     .cv-date { white-space: normal; color: var(--global-text-color-light); }
@@ -137,15 +149,15 @@ layout: default
       <h2>Projects</h2>
       <article class="featured-project">
         <div>
-          <video id="ros-project-video" class="project-video" controls playsinline preload="auto" aria-label="Demonstration video of the precision-controlled object loading system using ROS">
-            <source src="{{ '/assets/video/ros.mp4#t=0.1' | relative_url }}" type="video/mp4">
-            Your browser does not support embedded video playback.
-          </video>
+          <button class="project-thumbnail-button" type="button" data-open-project-video aria-label="Play the ROS project demonstration video">
+            <img class="project-thumbnail-image" src="{{ '/assets/img/projects/ros-loading-system.jpg' | relative_url }}" alt="ROS-based manipulator tracking and object loading demonstration" loading="lazy">
+            <span class="project-play-icon" aria-hidden="true"></span>
+          </button>
         </div>
         <div>
-          <button class="project-title-button" type="button" data-play-video="ros-project-video">Precision-Controlled Object Loading System Using ROS</button>
+          <button class="project-title-button" type="button" data-open-project-video>Precision-Controlled Object Loading System Using ROS</button>
           <p class="project-description">A motion-capture-based manipulator tracking control system using a 3D depth camera.</p>
-          <p class="project-play-note">Click the thumbnail or project title to play the demonstration.</p>
+          <p class="project-play-note">Click the thumbnail or project title to view the demonstration.</p>
         </div>
       </article>
     </section>
@@ -278,13 +290,48 @@ layout: default
   </article>
 </div>
 
+<div class="project-video-modal" id="project-video-modal" role="dialog" aria-modal="true" aria-label="ROS project demonstration video" aria-hidden="true">
+  <div class="project-video-dialog">
+    <button class="project-video-close" type="button" aria-label="Close video">&times;</button>
+    <video class="project-video-player" id="project-video-player" controls playsinline preload="metadata">
+      <source src="{{ '/assets/video/ros.mp4' | relative_url }}" type="video/mp4">
+      Your browser does not support embedded video playback.
+    </video>
+  </div>
+</div>
+
 <script>
-  document.querySelectorAll('[data-play-video]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const video = document.getElementById(button.dataset.playVideo);
-      if (video) {
-        video.play();
-      }
-    });
+  const projectVideoModal = document.getElementById('project-video-modal');
+  const projectVideoPlayer = document.getElementById('project-video-player');
+  const projectVideoClose = projectVideoModal.querySelector('.project-video-close');
+  let projectVideoTrigger = null;
+
+  function openProjectVideo(trigger) {
+    projectVideoTrigger = trigger;
+    projectVideoModal.classList.add('is-open');
+    projectVideoModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('project-video-open');
+    projectVideoClose.focus();
+    projectVideoPlayer.play();
+  }
+
+  function closeProjectVideo() {
+    projectVideoPlayer.pause();
+    projectVideoModal.classList.remove('is-open');
+    projectVideoModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('project-video-open');
+    if (projectVideoTrigger) projectVideoTrigger.focus();
+  }
+
+  document.querySelectorAll('[data-open-project-video]').forEach((button) => {
+    button.addEventListener('click', () => openProjectVideo(button));
+  });
+
+  projectVideoClose.addEventListener('click', closeProjectVideo);
+  projectVideoModal.addEventListener('click', (event) => {
+    if (event.target === projectVideoModal) closeProjectVideo();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && projectVideoModal.classList.contains('is-open')) closeProjectVideo();
   });
 </script>
