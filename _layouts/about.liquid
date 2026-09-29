@@ -28,8 +28,10 @@ layout: default
   .project-thumbnail-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #000; cursor: pointer; }
   .project-thumbnail-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.2s ease; }
   .project-thumbnail-button:hover .project-thumbnail-image, .project-thumbnail-button:focus .project-thumbnail-image { transform: scale(1.025); }
+  .project-heading-row { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
   .project-title-button { display: inline; margin: 0; padding: 0; border: 0; background: none; color: var(--global-theme-color); font: inherit; font-size: 1.12rem; font-weight: 700; line-height: 1.35; text-align: left; cursor: pointer; }
   .project-title-button:hover, .project-title-button:focus { text-decoration: underline; }
+  .project-year { flex: 0 0 auto; color: var(--global-text-color-light); font-size: 0.95rem; }
   .project-description { margin: 12px 0 0; color: var(--global-text-color); font-size: 1rem; line-height: 1.6; }
   .project-play-note { margin: 12px 0 0; color: var(--global-text-color-light); font-size: 0.9rem; }
   .project-video-modal { position: fixed; z-index: 2000; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.84); }
@@ -152,7 +154,10 @@ layout: default
           </button>
         </div>
         <div>
-          <button class="project-title-button" type="button" data-open-project-video>Precision-Controlled Object Loading System Using ROS</button>
+          <div class="project-heading-row">
+            <button class="project-title-button" type="button" data-open-project-video>Precision-Controlled Object Loading System Using ROS</button>
+            <span class="project-year">2022</span>
+          </div>
           <p class="project-description">A motion-capture-based manipulator tracking control system using a 3D depth camera.</p>
           <p class="project-play-note">Click the thumbnail or project title to view the demonstration.</p>
         </div>
