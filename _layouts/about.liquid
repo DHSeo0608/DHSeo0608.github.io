@@ -24,6 +24,12 @@ layout: default
   .home-section:first-child { margin-top: 0; }
   .home-section > h2 { margin-bottom: 24px; }
   .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
+  .featured-project { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 30px; align-items: start; padding: 18px 0 8px; }
+  .project-video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 5px; background: #000; object-fit: cover; cursor: pointer; }
+  .project-title-button { display: inline; margin: 0; padding: 0; border: 0; background: none; color: var(--global-theme-color); font: inherit; font-size: 1.12rem; font-weight: 700; line-height: 1.35; text-align: left; cursor: pointer; }
+  .project-title-button:hover, .project-title-button:focus { text-decoration: underline; }
+  .project-description { margin: 12px 0 0; color: var(--global-text-color); font-size: 1rem; line-height: 1.6; }
+  .project-play-note { margin: 12px 0 0; color: var(--global-text-color-light); font-size: 0.9rem; }
   .cv-card { padding: 28px 30px; border-radius: 6px; background: var(--global-card-bg-color); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); }
   .cv-entry { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 28px; padding: 0 0 24px; }
   .cv-entry + .cv-entry { padding-top: 24px; border-top: 1px solid var(--global-divider-color); }
@@ -60,6 +66,7 @@ layout: default
     .research-interest-list { grid-column: 1; flex-wrap: wrap; overflow-x: visible; gap: 10px; }
     .research-interest-tag { padding: 9px 15px; font-size: 0.95rem; }
     .home-section { margin-top: 36px; }
+    .featured-project { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .cv-card { padding: 22px 20px; }
     .cv-entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
     .cv-date { white-space: normal; color: var(--global-text-color-light); }
@@ -128,18 +135,19 @@ layout: default
 
     <section class="home-section" id="projects">
       <h2>Projects</h2>
-      {% if site.projects.size == 0 %}
-        <p>Project details will be added soon.</p>
-      {% else %}
-        {% assign sorted_projects = site.projects | sort: 'importance' %}
-        <div class="projects">
-          <div class="row row-cols-1 row-cols-md-3">
-            {% for project in sorted_projects %}
-              {% include projects.liquid %}
-            {% endfor %}
-          </div>
+      <article class="featured-project">
+        <div>
+          <video id="ros-project-video" class="project-video" controls playsinline preload="auto" aria-label="Demonstration video of the precision-controlled object loading system using ROS">
+            <source src="{{ '/assets/video/ros.mp4#t=0.1' | relative_url }}" type="video/mp4">
+            Your browser does not support embedded video playback.
+          </video>
         </div>
-      {% endif %}
+        <div>
+          <button class="project-title-button" type="button" data-play-video="ros-project-video">Precision-Controlled Object Loading System Using ROS</button>
+          <p class="project-description">A motion-capture-based manipulator tracking control system using a 3D depth camera.</p>
+          <p class="project-play-note">Click the thumbnail or project title to play the demonstration.</p>
+        </div>
+      </article>
     </section>
 
     <section class="home-section" id="education">
@@ -269,3 +277,14 @@ layout: default
     {% endif %}
   </article>
 </div>
+
+<script>
+  document.querySelectorAll('[data-play-video]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const video = document.getElementById(button.dataset.playVideo);
+      if (video) {
+        video.play();
+      }
+    });
+  });
+</script>
