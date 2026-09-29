@@ -25,13 +25,14 @@ layout: default
   .home-section > h2 { margin-bottom: 24px; }
   .home-section-intro { margin-top: -12px; margin-bottom: 28px; color: var(--global-text-color-light); }
   .featured-project { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 30px; align-items: start; padding: 18px 0 8px; }
+  .featured-project + .featured-project { margin-top: 22px; padding-top: 34px; border-top: 1px solid var(--global-divider-color); }
   .project-thumbnail-button { position: relative; display: block; width: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 5px; background: #000; cursor: pointer; }
   .project-thumbnail-image { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; transition: transform 0.2s ease; }
   .project-thumbnail-button:hover .project-thumbnail-image, .project-thumbnail-button:focus .project-thumbnail-image { transform: scale(1.025); }
   .project-heading-row { display: flex; align-items: baseline; justify-content: space-between; gap: 18px; }
   .project-title-button { display: inline; margin: 0; padding: 0; border: 0; background: none; color: var(--global-theme-color); font: inherit; font-size: 1.12rem; font-weight: 700; line-height: 1.35; text-align: left; cursor: pointer; }
   .project-title-button:hover, .project-title-button:focus { text-decoration: underline; }
-  .project-year { flex: 0 0 auto; color: var(--global-text-color-light); font-size: 0.95rem; }
+  .project-year { flex: 0 0 auto; color: var(--global-text-color-light); font-size: 2rem; font-weight: 400; line-height: 1.2; }
   .project-description { margin: 12px 0 0; color: var(--global-text-color); font-size: 1rem; line-height: 1.6; }
   .project-play-note { margin: 12px 0 0; color: var(--global-text-color-light); font-size: 0.9rem; }
   .project-video-modal { position: fixed; z-index: 2000; inset: 0; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(0, 0, 0, 0.84); }
@@ -149,13 +150,29 @@ layout: default
       <h2>Projects</h2>
       <article class="featured-project">
         <div>
-          <button class="project-thumbnail-button" type="button" data-open-project-video aria-label="Play the ROS project demonstration video">
+          <button class="project-thumbnail-button" type="button" data-open-project-video data-video-src="{{ '/assets/video/home-mobility-llm.mp4' | relative_url }}" data-video-label="Home Mobility with LLM demonstration video" aria-label="Play the Home Mobility with LLM demonstration video">
+            <img class="project-thumbnail-image" src="{{ '/assets/img/projects/home-mobility-llm.jpg' | relative_url }}" alt="Home Mobility with LLM project presentation in Daegu" loading="lazy">
+          </button>
+        </div>
+        <div>
+          <div class="project-heading-row">
+            <button class="project-title-button" type="button" data-open-project-video data-video-src="{{ '/assets/video/home-mobility-llm.mp4' | relative_url }}" data-video-label="Home Mobility with LLM demonstration video">Home Mobility with LLM</button>
+            <span class="project-year">2024</span>
+          </div>
+          <p class="project-description">An autonomous driving system built through an LLM-based automated code generation pipeline.</p>
+          <p class="project-play-note">Click the thumbnail or project title to view the demonstration.</p>
+        </div>
+      </article>
+
+      <article class="featured-project">
+        <div>
+          <button class="project-thumbnail-button" type="button" data-open-project-video data-video-src="{{ '/assets/video/ros.mp4' | relative_url }}" data-video-label="ROS project demonstration video" aria-label="Play the ROS project demonstration video">
             <img class="project-thumbnail-image" src="{{ '/assets/img/projects/ros-loading-system.jpg' | relative_url }}" alt="ROS-based manipulator tracking and object loading demonstration" loading="lazy">
           </button>
         </div>
         <div>
           <div class="project-heading-row">
-            <button class="project-title-button" type="button" data-open-project-video>Precision-Controlled Object Loading System Using ROS</button>
+            <button class="project-title-button" type="button" data-open-project-video data-video-src="{{ '/assets/video/ros.mp4' | relative_url }}" data-video-label="ROS project demonstration video">Precision-Controlled Object Loading System Using ROS</button>
             <span class="project-year">2022</span>
           </div>
           <p class="project-description">A motion-capture-based manipulator tracking control system using a 3D depth camera.</p>
@@ -292,11 +309,11 @@ layout: default
   </article>
 </div>
 
-<div class="project-video-modal" id="project-video-modal" role="dialog" aria-modal="true" aria-label="ROS project demonstration video" aria-hidden="true">
+<div class="project-video-modal" id="project-video-modal" role="dialog" aria-modal="true" aria-label="Project demonstration video" aria-hidden="true">
   <div class="project-video-dialog">
     <button class="project-video-close" type="button" aria-label="Close video">&times;</button>
     <video class="project-video-player" id="project-video-player" controls playsinline preload="metadata">
-      <source src="{{ '/assets/video/ros.mp4' | relative_url }}" type="video/mp4">
+      <source id="project-video-source" type="video/mp4">
       Your browser does not support embedded video playback.
     </video>
   </div>
@@ -305,17 +322,25 @@ layout: default
 <script>
   const projectVideoModal = document.getElementById('project-video-modal');
   const projectVideoPlayer = document.getElementById('project-video-player');
+  const projectVideoSource = document.getElementById('project-video-source');
   const projectVideoClose = projectVideoModal.querySelector('.project-video-close');
   let projectVideoTrigger = null;
 
   function openProjectVideo(trigger) {
     projectVideoTrigger = trigger;
+    const videoSource = trigger.dataset.videoSrc;
+    if (projectVideoSource.getAttribute('src') !== videoSource) {
+      projectVideoPlayer.pause();
+      projectVideoSource.setAttribute('src', videoSource);
+      projectVideoPlayer.load();
+    }
+    projectVideoModal.setAttribute('aria-label', trigger.dataset.videoLabel || 'Project demonstration video');
     projectVideoModal.classList.add('is-open');
     projectVideoModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-video-open');
     projectVideoClose.focus();
     projectVideoPlayer.currentTime = 0;
-    projectVideoPlayer.play();
+    projectVideoPlayer.play().catch(() => {});
   }
 
   function closeProjectVideo() {
