@@ -312,6 +312,7 @@ layout: default
     projectVideoModal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-video-open');
     projectVideoClose.focus();
+    projectVideoPlayer.currentTime = 0;
     projectVideoPlayer.play();
   }
 
